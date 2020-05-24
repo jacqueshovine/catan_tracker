@@ -8,13 +8,15 @@
     <div>
       <h2>Players</h2>
       <b-row>
-        <b-col v-for="(player, index) in players" :key="index">
+        <b-col v-for="player in players" v-bind:key="player.id" v-bind:name="player.name">
           <input v-model="player.name">
         </b-col>
       </b-row>
     </div>
     <hr>
     <h2>Resources</h2>
+    <player v-for="player in players" v-bind:key="player.id" v-bind:name="player.name"></player>
+    <!-- 
     <b-row v-for="player in players" v-bind:key="player.id">
       <b-col>{{ player.name }}</b-col>
       <b-col v-for="resource in resources" v-bind:key="resource.id">
@@ -22,29 +24,30 @@
       </b-col>
       <hr>
     </b-row>
+    -->
 
   </b-container>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-// import Player from './components/Player.vue'
-import Resource from './components/Resource.vue'
+import Player from './components/Player.vue'
+// import Resource from './components/Resource.vue'
 
 export default {
   name: 'App',
   components: {
     // HelloWorld,
-    //Player,
-    Resource
+    Player,
+    // Resource
   },
   data() {
     return {
       players: [
-        {name: 'Player 1', score: 0},
-        {name: 'Player 2', score: 0},
-        {name: 'Player 3', score: 0},
-        {name: 'Player 4', score: 0},
+        {id: 1, name: 'Player 1', score: 0},
+        {id: 2, name: 'Player 2', score: 0},
+        {id: 3, name: 'Player 3', score: 0},
+        {id: 4, name: 'Player 4', score: 0},
       ],
       resources: ['wood', 'brick', 'wheat', 'ore', 'sheep']
     }
