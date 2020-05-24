@@ -1,19 +1,24 @@
 <template>
+<div>
   <b-row>
-    <b-col cols="1">{{ name }}</b-col>
-    <b-col cols="1" v-for="resource in resources" v-bind:key="resource.id">
-      <b-button v-on:click="decrement(resource, 1)" variant="danger"> - </b-button> {{ resource.count }} <b-button v-on:click="increment(resource, 1)" variant="success"> + </b-button>
+    <b-col cols="1">{{ name }}<b-button v-on:click="resetResources()">Reset</b-button></b-col>
+    <b-col cols="2" v-for="resource in resources" v-bind:key="resource.id">
+      <b-button v-on:click="decrement(resource, 1)" variant="danger"> - </b-button> <span class="resourceCount">{{ resource.count }}</span> <b-button v-on:click="increment(resource, 1)" variant="success"> + </b-button>
     </b-col>
-    <b-col cols="5">
+
+    <b-col cols="1">
+      Score
+    </b-col>
+  </b-row>
+  <b-row>
+    <b-col>
       <b-button class="btn-action" variant="info" v-on:click="buildRoad()">Build road</b-button>
       <b-button class="btn-action" variant="info" v-on:click="buildSettlement()">Build settlement</b-button>
       <b-button class="btn-action" variant="info" v-on:click="buildCity()">Build city</b-button>
       <b-button class="btn-action" variant="info" v-on:click="drawCard()">Draw card</b-button>
     </b-col>
-    <b-col cols="1">
-      Score
-    </b-col>
   </b-row>
+</div>
 </template>
 
 <script>
@@ -47,6 +52,9 @@ export default {
       if (resource.count > 0) {
         resource.count -= n
       }
+    },
+    setResource(resource, n) {
+      resource.count = n
     },
     hasResources(name, amount) {
       return this.resources.filter((r) => {
@@ -131,6 +139,11 @@ export default {
         if (r.name === 'Sheep' || r.name === 'Wheat' || r.name === 'Ore') {
           this.decrement(r, 1)
         }
+      })
+    },
+    resetResources() {
+      this.resources.map((r) => {
+        this.setResource(r, 0)
       })
     }
   }

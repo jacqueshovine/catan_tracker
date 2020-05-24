@@ -49,12 +49,11 @@ export default {
       ],
       headers: [
         {title: 'Name', cols: 1},
-        {title: 'Wood', cols: 1},
-        {title: 'Brick', cols: 1},
-        {title: 'Wheat', cols: 1},
-        {title: 'Ore', cols: 1},
-        {title: 'Sheep', cols: 1},
-        {title: 'Actions', cols: 5},
+        {title: 'Wood', cols: 2},
+        {title: 'Brick', cols: 2},
+        {title: 'Wheat', cols: 2},
+        {title: 'Ore', cols: 2},
+        {title: 'Sheep', cols: 2},
         {title: 'Score', cols: 1}
       ]
     }
@@ -82,6 +81,10 @@ export default {
 
 .btn-action {
   margin:0 5px;
+}
+
+.resourceCount {
+  font-size: 1.5em;
 }
 
 label {
