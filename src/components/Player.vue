@@ -5,10 +5,10 @@
       <b-button v-on:click="decrement(resource, 1)" variant="danger"> - </b-button> {{ resource.count }} <b-button v-on:click="increment(resource, 1)" variant="success"> + </b-button>
     </b-col>
     <b-col cols="5">
-      <b-button class="btn-action" v-on:click="buildRoad()">Build road</b-button>
-      <b-button class="btn-action">Build settlement</b-button>
-      <b-button class="btn-action">Build city</b-button>
-      <b-button class="btn-action">Draw card</b-button>
+      <b-button class="btn-action" variant="info" v-on:click="buildRoad()">Build road</b-button>
+      <b-button class="btn-action" variant="info" v-on:click="buildSettlement()">Build settlement</b-button>
+      <b-button class="btn-action" variant="info" v-on:click="buildCity()">Build city</b-button>
+      <b-button class="btn-action" variant="info" v-on:click="drawCard()">Draw card</b-button>
     </b-col>
     <b-col cols="1">
       Score
@@ -65,6 +65,70 @@ export default {
 
       this.resources.map((r) => {
         if (r.name === 'Wood' || r.name === 'Brick') {
+          this.decrement(r, 1)
+        }
+      })
+    },
+    // Settlement = 1Wood, 1Brick, 1Sheep, 1Wheat
+    buildSettlement() {
+      if (!this.hasResources('Wood', 1)) {
+        return
+      }
+
+      if (!this.hasResources('Brick', 1)) {
+        return
+      }
+
+      if (!this.hasResources('Sheep', 1)) {
+        return
+      }
+  
+      if (!this.hasResources('Wheat', 1)) {
+        return
+      }
+
+      this.resources.map((r) => {
+        if (r.name !== 'Ore') {
+          this.decrement(r, 1)
+        }
+      }) 
+    },
+    // City = 2Wheat, 3Ore
+    buildCity() {
+      if (!this.hasResources('Wheat', 2)) {
+        return
+      }
+
+      if (!this.hasResources('Ore', 3)) {
+        return
+      }
+
+      this.resources.map((r) => {
+        if (r.name === 'Wheat') {
+          this.decrement(r, 2)
+        }
+
+        if (r.name === 'Ore') {
+          this.decrement(r, 3)
+        }
+      })
+    },
+    // Draw card = 1Sheep, 1 Wheat, 1Ore
+    drawCard() {
+      if (!this.hasResources('Sheep', 1)) {
+        return
+      }
+
+      if (!this.hasResources('Wheat', 1)) {
+        return
+      }
+
+      if (!this.hasResources('Ore', 1)) {
+        return
+      }
+
+      this.resources.map((r) => {
+        if (r.name === 'Sheep' || r.name === 'Wheat' || r.name === 'Ore') {
           this.decrement(r, 1)
         }
       })
