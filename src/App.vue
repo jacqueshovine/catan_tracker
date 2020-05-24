@@ -15,17 +15,14 @@
     </div>
     <hr>
     <h2>Resources</h2>
-    <player v-for="player in players" v-bind:key="player.id" v-bind:name="player.name"></player>
-    <!-- 
-    <b-row v-for="player in players" v-bind:key="player.id">
-      <b-col>{{ player.name }}</b-col>
-      <b-col v-for="resource in resources" v-bind:key="resource.id">
-        <resource :resourceName="resource"/>
-      </b-col>
-      <hr>
-    </b-row>
-    -->
-
+    <div>
+      <b-row>
+        <b-col class="header" v-for="header in headers" v-bind:key="header.key" :cols="header.cols">{{ header.title }}</b-col>
+      </b-row>
+    </div>
+    <div v-for="player in players" v-bind:key="player.id" >
+      <player class="playerRow" v-bind:name="player.name"></player>
+    </div>
   </b-container>
 </template>
 
@@ -49,7 +46,16 @@ export default {
         {id: 3, name: 'Player 3', score: 0},
         {id: 4, name: 'Player 4', score: 0},
       ],
-      resources: ['wood', 'brick', 'wheat', 'ore', 'sheep']
+      headers: [
+        {title: 'Name', cols: 1},
+        {title: 'Wood', cols: 1},
+        {title: 'Brick', cols: 1},
+        {title: 'Wheat', cols: 1},
+        {title: 'Ore', cols: 1},
+        {title: 'Sheep', cols: 1},
+        {title: 'Actions', cols: 5},
+        {title: 'Score', cols: 1}
+      ]
     }
   }
 }
@@ -63,6 +69,18 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.header {
+  font-weight: bold;
+}
+
+.playerRow {
+  margin-top:20px;
+}
+
+.btn-action {
+  margin:0 5px;
 }
 
 label {
