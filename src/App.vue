@@ -21,6 +21,7 @@
       </b-row>
     </div>
     <div v-for="player in players" v-bind:key="player.id" >
+      <hr>
       <player class="playerRow" v-bind:name="player.name"></player>
     </div>
   </b-container>
